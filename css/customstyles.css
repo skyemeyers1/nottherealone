@@ -1,0 +1,52 @@
+h1{
+    color:rgb(221, 227, 241);
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 60px;
+}
+body{
+    background-color: rgb(199, 227, 236);
+}
+h5{
+    font-style:normal;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: normal;
+    color:rgb(51, 23, 23);
+    font-size: 16px;
+    text-align: left;
+}
+.desc{
+    color: white;
+    font-size: 15px;
+
+}
+.school{
+    font-style:normal;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    color:rgb(27, 9, 9);
+    font-size: 18px;
+    text-align: left;
+}
+.subtopics{
+    font-style: italic;
+    color:rgb(114, 70, 70);
+    font-weight: none;
+    font-size: 15px;
+    text-align: left;
+}
+
+.box-model{
+    padding:25px;
+    background-color: rgb(255, 255, 255);
+    border: 10px solid rgb(0, 55, 107);
+    margin: 10px;
+
+}
+.skills{
+    font-style: italic;
+    color:rgb(112, 9, 9);
+    font-weight: none;
+    font-size: 15px;
+    text-align: left;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

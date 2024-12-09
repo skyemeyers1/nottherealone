@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tower of Hanoi</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin: 0;
+      height: 100vh;
+      background-color: #f7f7f7;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .game-container {
+      display: flex;
+      justify-content: space-around;
+      width: 600px;
+    }
+    .rod {
+      width: 150px;
+      height: 200px;
+      background-color: #ddd;
+      position: relative;
+      border-radius: 5px;
+    }
+    .rod:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 10px;
+      background-color: #555;
+      margin-left: -5px;
+    }
+    .disk {
+      position: absolute;
+      bottom: 0;
+      height: 30px;
+      text-align: center;
+      line-height: 30px;
+      border-radius: 5px;
+      color: #fff;
+      font-weight: bold;
+      cursor: grab;
+    }
+    .disk:hover {
+      background-color: #f39c12;
+    }
+    .disk:active {
+      cursor: grabbing;
+    }
+    .controls {
+      margin-top: 20px;
+    }
+    .controls button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      background-color: #3498db;
+      color: white;
+      border-radius: 5px;
+    }
+    .controls button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tower of Hanoi</h1>
+  <div class="game-container" id="game">
+    <div class="rod" data-rod="1"></div>
+    <div class="rod" data-rod="2"></div>
+    <div class="rod" data-rod="3"></div>
+  </div>
+  <div class="controls">
+    <button onclick="resetGame()">Reset Game</button>
+  </div>
+
+  <script>
+    const gameContainer = document.getElementById('game');
+    let draggedDisk = null;
+
+    // Function to initialize the game
+    function initializeGame() {
+      const rod1 = document.querySelector('.rod[data-rod="1"]');
+      rod1.innerHTML = ''; // Clear any existing disks
+
+      // Create disks
+      const diskColors = ['#e74c3c', '#f1c40f', '#2ecc71', '#3498db'];
+      for (let i = diskColors.length; i > 0; i--) {
+        const disk = document.createElement('div');
+        disk.className = 'disk';
+        disk.style.width = `${30 * i}px`;
+        disk.style.backgroundColor = diskColors[i - 1];
+        disk.dataset.size = i;
+        disk.draggable = true;
+        disk.addEventListener('dragstart', handleDragStart);
+        disk.addEventListener('dragend', handleDragEnd);
+        rod1.appendChild(disk);
+      }
+
+      // Add dragover listeners to rods
+      document.querySelectorAll('.rod').forEach(rod => {
+        rod.addEventListener('dragover', handleDragOver);
+        rod.addEventListener('drop', handleDrop);
+      });
+    }
+
+    // Drag event handlers
+    function handleDragStart(e) {
+      draggedDisk = e.target;
+      setTimeout(() => {
+        e.target.style.visibility = 'hidden';
+      }, 0);
+    }
+
+    function handleDragEnd(e) {
+      e.target.style.visibility = 'visible';
+      draggedDisk = null;
+    }
+
+    function handleDragOver(e) {
+      e.preventDefault();
+    }
+
+    function handleDrop(e) {
+      e.preventDefault();
+      const rod = e.currentTarget;
+      const topDisk = rod.lastElementChild;
+
+      if (!topDisk || +draggedDisk.dataset.size < +topDisk.dataset.size) {
+        rod.appendChild(draggedDisk);
+      }
+    }
+
+    // Reset game
+    function resetGame() {
+      initializeGame();
+    }
+
+    // Initialize game on page load
+    initializeGame();
+  </script>
+</body>
+</html>
